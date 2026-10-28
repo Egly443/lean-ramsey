@@ -187,8 +187,7 @@ contrast, demands the image be an actual non-adjacent pair — a real combinator
 -- The colour argument is deliberately ignored: both colours get the *same* target graph, which
 -- is the point of the instance below (`indArrow_top_fin2_emptyTargets`) — whichever colour is not
 -- `K₂`'s single edge has an entirely empty colour class, matching this target either way.
-@[nolint unusedArguments]
-def indArrowEmptyTargets : Bool → SimpleGraph (Fin 2) := fun _ => (⊥ : SimpleGraph (Fin 2))
+def indArrowEmptyTargets : Bool → SimpleGraph (Fin 2) := Function.const Bool ⊥
 
 /-- **The worked, checked induced-specific instance.** Every red/blue (`Bool`) labelling of `K₂`'s
 single edge contains, in some colour, an induced copy of the empty 2-vertex graph. `K₂` has

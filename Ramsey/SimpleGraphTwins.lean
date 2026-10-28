@@ -83,8 +83,8 @@ theorem TrueTwins.symm {v w : V} (h : G.TrueTwins v w) : G.TrueTwins w v :=
   ⟨h.1.symm, G.adj_symm h.2.1, h.2.2.symm⟩
 
 theorem FalseTwins.twinVertices {v w : V} (h : G.FalseTwins v w) : G.TwinVertices v w :=
-  ⟨h.1, by rw [Set.sdiff_singleton_eq_self h.2.1,
-    Set.sdiff_singleton_eq_self (mt G.adj_symm h.2.1), h.2.2]⟩
+  ⟨h.1, by rw [Set.sdiff_singleton_eq_self (show w ∉ G.neighborSet v from h.2.1),
+    Set.sdiff_singleton_eq_self (show v ∉ G.neighborSet w from mt G.adj_symm h.2.1), h.2.2]⟩
 
 theorem TrueTwins.twinVertices {v w : V} (h : G.TrueTwins v w) : G.TwinVertices v w := by
   obtain ⟨hne, hadj, heq⟩ := h
@@ -98,8 +98,8 @@ theorem TrueTwins.twinVertices {v w : V} (h : G.TrueTwins v w) : G.TwinVertices 
 /-- **False twins are exactly the non-adjacent twins.** -/
 theorem falseTwins_iff {v w : V} : G.FalseTwins v w ↔ G.TwinVertices v w ∧ ¬G.Adj v w :=
   ⟨fun h => ⟨h.twinVertices, h.2.1⟩, fun ⟨⟨hne, heq⟩, hnadj⟩ => ⟨hne, hnadj, by
-    rwa [Set.sdiff_singleton_eq_self hnadj, Set.sdiff_singleton_eq_self (mt G.adj_symm hnadj)]
-      at heq⟩⟩
+    rwa [Set.sdiff_singleton_eq_self (show w ∉ G.neighborSet v from hnadj),
+      Set.sdiff_singleton_eq_self (show v ∉ G.neighborSet w from mt G.adj_symm hnadj)] at heq⟩⟩
 
 
 
